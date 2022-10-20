@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wcaetano <wcaetano@student.42.rio>         +#+  +:+       +#+        */
+/*   By: lguedes <lguedes@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 16:53:29 by wcaetano          #+#    #+#             */
-/*   Updated: 2022/10/20 19:00:35 by wcaetano         ###   ########.fr       */
+/*   Updated: 2022/10/20 20:15:39 by lguedes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	is_ordered(t_list *stack)
 	while (stack)
 	{
 		actual = get_int(stack);
-		if (last > actual)
+		if (last < actual)
 			return (0);
 		stack = stack->next;
 		last = actual;
@@ -93,13 +93,13 @@ void	binary_radix_sort(t_list **stack_a, t_list **stack_b, int size)
 			num = ((unsigned) get_int(*stack_a)) + slack;
 			if ((num >> current_place) & 1)
 			{
-				ft_printf("pb\n");
-				push(stack_a, stack_b);
+				ft_printf("ra\n");
+				rotate(stack_a);
 			}
 			else
 			{
-				ft_printf("ra\n");
-				rotate(stack_a);
+				ft_printf("pb\n");
+				push(stack_a, stack_b);
 			}
 			operations++;
 		}
