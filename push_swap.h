@@ -6,7 +6,7 @@
 /*   By: wcaetano <wcaetano@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 19:30:49 by wcaetano          #+#    #+#             */
-/*   Updated: 2022/09/27 19:34:00 by wcaetano         ###   ########.fr       */
+/*   Updated: 2023/03/12 16:41:40 by wcaetano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,5 @@ void	rotate(t_list **stack);
 void	rrotate(t_list **stack);
 void	binary_radix_sort(t_list **stack_a, t_list **stack_b, int size);
 t_list	*fill_stack(t_list **stack, int *lst, int size);
+int		is_ordered(t_list *stack);
 #endif

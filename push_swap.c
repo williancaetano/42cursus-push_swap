@@ -6,7 +6,7 @@
 /*   By: wcaetano <wcaetano@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 20:01:41 by wcaetano          #+#    #+#             */
-/*   Updated: 2022/10/20 19:00:21 by wcaetano         ###   ########.fr       */
+/*   Updated: 2023/03/12 16:14:05 by wcaetano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,19 @@ void	dummy(void *tmp)
 		return ;
 }
 
+int	ft_isnumber(char *str)
+{
+	if (*str == '-' || *str == '+')
+		str++;
+	while (*str)
+	{
+		if (!ft_isdigit(*str))
+			return (0);
+		str++;
+	}
+	return (1);
+}
+
 int	*get_int_lst(char **argv, int argc)
 {
 	int		i;
@@ -29,6 +42,11 @@ int	*get_int_lst(char **argv, int argc)
 	lst = malloc((argc - 1) * sizeof(*lst));
 	while (i < argc - 1)
 	{
+		if (!ft_isnumber(argv[i + 1]))
+		{
+			free(lst);
+			return (NULL);
+		}
 		lst[i] = ft_atoi(argv[i + 1]);
 		i++;
 	}
@@ -60,15 +78,12 @@ int	main(int argc, char **argv)
 
 	if (argc < 2)
 	{
-		ft_printf("ERROR\n");
+		write(1, "ERROR\n", 6);
 		return (0);
 	}
 	lst = get_int_lst(argv, argc);
 	if (!lst)
-	{
-		ft_printf("ERROR\n");
 		return (0);
-	}
 	stack_a = NULL;
 	stack_b = NULL;
 	fill_stack(&stack_a, lst, argc - 1);

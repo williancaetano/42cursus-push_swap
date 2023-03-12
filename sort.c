@@ -6,34 +6,82 @@
 /*   By: wcaetano <wcaetano@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 16:53:29 by wcaetano          #+#    #+#             */
-/*   Updated: 2022/10/20 19:00:35 by wcaetano         ###   ########.fr       */
+/*   Updated: 2023/03/12 16:43:11 by wcaetano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	find_edge_value(t_list *stack_a, char min_max)
+void	fill_list(t_list *stack, int *lst, int size)
 {
-	int	num;
-	int tmp;
+	int	i;
+	int	j;
+	int	min_index;
+	int	tmp;
 
-	num = get_int(stack_a);
-	while(stack_a)
+	i = 0;
+	while (i < size)
 	{
-		tmp = get_int(stack_a);
-		if (min_max == MIN)
-		{
-			if (tmp < num)
-				num = tmp;
-		}
-		else if (min_max == MAX)
-		{
-			if (tmp > num)
-				num = tmp;
-		}
-		stack_a = stack_a->next;
+		lst[i] = get_int(stack);
+		stack = stack->next;
+		i++;
 	}
-	return num;
+	i = 0;
+	while (i < size)
+	{
+		j = i;
+		min_index = i;
+		while (j < size)
+		{
+			if (lst[j] < lst[min_index])
+				min_index = j;
+			j++;
+		}
+		tmp = lst[i];
+		lst[i] = lst[min_index];
+		lst[min_index] = tmp;
+		i++;
+	}
+}
+
+void	index_stack(t_list	*stack, int size)
+{
+	int		*lst;
+	int		i;
+	int		j;
+	t_list	*p;
+	int		*tmp;
+
+	lst = malloc(sizeof(int) * size);
+	tmp = malloc(sizeof(int) * size);
+	if (!lst)
+		exit(1);
+	fill_list(stack, lst, size);
+	i = 0;
+	while (i < size)
+	{
+		p = stack;
+		j = 0;
+		while (p)
+		{
+			if (get_int(p) == lst[i])
+			{
+				tmp[j] = i;
+				break ;
+			}
+			j++;
+			p = p->next;
+		}
+		i++;
+	}
+	i = 0;
+	while (i < size)
+	{
+		*((int *)stack->content) = tmp[i++];
+		stack = stack->next;
+	}
+	free(lst);
+	free(tmp);
 }
 
 int	is_ordered(t_list *stack)
@@ -53,61 +101,37 @@ int	is_ordered(t_list *stack)
 	return (1);
 }
 
-int msb_one(unsigned num, unsigned slack)
-{
-	int	i;
-
-	i = 0;
-	num += slack;
-	while (num)
-	{
-		num >>= 1;
-		i++;
-	}
-	return (i);
-}
-
 void	binary_radix_sort(t_list **stack_a, t_list **stack_b, int size)
 {
-	int			places;
-	int			min;
-	int			operations;
-	int			current_place;
-	unsigned	slack;
-	unsigned	num;
+	int	operations;
+	int	current_place;
+	int	b_size;
 
-	slack = 0;
+	index_stack(*stack_a, size);
 	current_place = 0;
-	min = find_edge_value(*stack_a, MIN);
-	if (min < 0)
-		slack = -min;
-	places = msb_one(find_edge_value(*stack_a, MAX), slack);
-
-	while (places--)
+	while (!is_ordered(*stack_a))
 	{
 		operations = 0;
-		if (is_ordered(*stack_a))
-			return ;
+		b_size = 0;
 		while (operations < size)
 		{
-			num = ((unsigned) get_int(*stack_a)) + slack;
-			if ((num >> current_place) & 1)
+			if (((get_int(*stack_a) >> current_place) & 1) == 1)
 			{
-				ft_printf("pb\n");
-				push(stack_a, stack_b);
+				write(1, "ra\n", 3);
+				rotate(stack_a);
 			}
 			else
 			{
-				ft_printf("ra\n");
-				rotate(stack_a);
+				write(1, "pb\n", 3);
+				push(stack_a, stack_b);
+				b_size++;
 			}
 			operations++;
 		}
-		operations = ft_lstsize(*stack_b);
-		while(operations--)
+		while (b_size--)
 		{
-			ft_printf("pa\n");
-			push(stack_b, stack_a);	
+			write(1, "pa\n", 3);
+			push(stack_b, stack_a);
 		}
 		current_place++;
 	}

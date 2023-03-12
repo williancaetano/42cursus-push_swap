@@ -1,0 +1,115 @@
+ra
+ra
+pb
+pb
+ra
+pb
+ra
+ra
+pb
+pb
+ra
+pb
+ra
+pb
+pa
+pa
+pa
+pa
+pa
+pa
+pa
+pb
+ra
+ra
+ra
+pb
+pb
+pb
+pb
+ra
+pb
+pb
+ra
+ra
+pb
+pa
+pa
+pa
+pa
+pa
+pa
+pa
+pa
+ra
+ra
+pb
+pb
+ra
+pb
+ra
+pb
+ra
+pb
+pb
+pb
+pb
+ra
+pa
+pa
+pa
+pa
+pa
+pa
+pa
+pa
+ra
+pb
+pb
+ra
+ra
+pb
+pb
+ra
+ra
+pb
+pb
+ra
+pb
+pb
+pa
+pa
+pa
+pa
+pa
+pa
+pa
+pa
+-24
+-275
+911
+-424
+1
+652
+991
+760
+-309
+-159
+191
+496
+619
+-727
+0 -727
+1 -424
+2 -309
+3 -275
+4 -159
+5 -24
+6 1
+7 191
+8 496
+9 619
+10 652
+11 760
+12 911
+13 991

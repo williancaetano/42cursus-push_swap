@@ -6,7 +6,7 @@
 /*   By: wcaetano <wcaetano@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 19:50:06 by wcaetano          #+#    #+#             */
-/*   Updated: 2022/10/20 18:18:41 by wcaetano         ###   ########.fr       */
+/*   Updated: 2023/03/12 16:41:10 by wcaetano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,11 @@ void	swap(t_list **stack)
 
 	tmp1 = pop_front(stack);
 	if (!tmp1)
-	{
-		ft_printf("Empty! ");
 		return ;
-	}
 	tmp2 = pop_front(stack);
 	if (!tmp2)
 	{
 		ft_lstadd_front(stack, tmp1);
-		ft_printf("Only 1 item! ");
 		return ;
 	}
 	ft_lstadd_front(stack, ft_lstnew(tmp2));
@@ -42,10 +38,7 @@ void	push(t_list **src, t_list **dst)
 
 	tmp = pop_front(src);
 	if (!tmp)
-	{
-		ft_printf("Empty! ");
 		return ;
-	}
 	ft_lstadd_front(dst, ft_lstnew(tmp));
 }
 
@@ -56,10 +49,7 @@ void	rotate(t_list **stack)
 
 	tmp = pop_front(stack);
 	if (!tmp)
-	{
-		ft_printf("Empty! ");
 		return ;
-	}
 	ft_lstadd_back(stack, ft_lstnew(tmp));
 }
 
@@ -70,9 +60,6 @@ void	rrotate(t_list **stack)
 
 	tmp = pop_back(stack);
 	if (!tmp)
-	{
-		ft_printf("Empty! ");
 		return ;
-	}
 	ft_lstadd_front(stack, ft_lstnew(tmp));
 }
