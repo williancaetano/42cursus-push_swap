@@ -6,7 +6,7 @@
 /*   By: wcaetano <wcaetano@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 19:50:06 by wcaetano          #+#    #+#             */
-/*   Updated: 2023/03/12 16:41:10 by wcaetano         ###   ########.fr       */
+/*   Updated: 2023/03/12 16:47:36 by wcaetano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	swap(t_list **stack)
 }
 
 //pa pb
-void	push(t_list **src, t_list **dst)
+void	push(t_list **src, t_list **dst, char *msg)
 {
 	void	*tmp;
 
@@ -40,10 +40,11 @@ void	push(t_list **src, t_list **dst)
 	if (!tmp)
 		return ;
 	ft_lstadd_front(dst, ft_lstnew(tmp));
+	write(1, msg, ft_strlen(msg));
 }
 
 // ra rb
-void	rotate(t_list **stack)
+void	rotate(t_list **stack, char *msg)
 {
 	void	*tmp;
 
@@ -51,6 +52,7 @@ void	rotate(t_list **stack)
 	if (!tmp)
 		return ;
 	ft_lstadd_back(stack, ft_lstnew(tmp));
+	write(1, msg, ft_strlen(msg));
 }
 
 //rra rrb

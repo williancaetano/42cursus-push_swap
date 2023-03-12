@@ -6,7 +6,7 @@
 /*   By: wcaetano <wcaetano@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 16:53:29 by wcaetano          #+#    #+#             */
-/*   Updated: 2023/03/12 16:43:11 by wcaetano         ###   ########.fr       */
+/*   Updated: 2023/03/12 17:19:33 by wcaetano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,11 @@ void	fill_list(t_list *stack, int *lst, int size)
 	i = 0;
 	while (i < size)
 	{
-		j = i;
+		j = i - 1;
 		min_index = i;
-		while (j < size)
-		{
+		while (++j < size)
 			if (lst[j] < lst[min_index])
 				min_index = j;
-			j++;
-		}
 		tmp = lst[i];
 		lst[i] = lst[min_index];
 		lst[min_index] = tmp;
@@ -57,6 +54,23 @@ void	index_stack(t_list	*stack, int size)
 	if (!lst)
 		exit(1);
 	fill_list(stack, lst, size);
+	p = parse_lst(tmp, lst, stack, size);
+	i = 0;
+	while (i < size)
+	{
+		*((int *)stack->content) = tmp[i++];
+		stack = stack->next;
+	}
+	free(lst);
+	free(tmp);
+}
+
+t_list	*parse_lst(int *tmp, int *lst, t_list *stack, int size)
+{
+	int		i;
+	int		j;
+	t_list	*p;
+
 	i = 0;
 	while (i < size)
 	{
@@ -74,14 +88,7 @@ void	index_stack(t_list	*stack, int size)
 		}
 		i++;
 	}
-	i = 0;
-	while (i < size)
-	{
-		*((int *)stack->content) = tmp[i++];
-		stack = stack->next;
-	}
-	free(lst);
-	free(tmp);
+	return (p);
 }
 
 int	is_ordered(t_list *stack)
@@ -113,26 +120,18 @@ void	binary_radix_sort(t_list **stack_a, t_list **stack_b, int size)
 	{
 		operations = 0;
 		b_size = 0;
-		while (operations < size)
+		while (operations++ < size)
 		{
 			if (((get_int(*stack_a) >> current_place) & 1) == 1)
-			{
-				write(1, "ra\n", 3);
-				rotate(stack_a);
-			}
+				rotate(stack_a, "ra\n");
 			else
 			{
-				write(1, "pb\n", 3);
-				push(stack_a, stack_b);
+				push(stack_a, stack_b, "pb\n");
 				b_size++;
 			}
-			operations++;
 		}
 		while (b_size--)
-		{
-			write(1, "pa\n", 3);
-			push(stack_b, stack_a);
-		}
+			push(stack_b, stack_a, "pa\n");
 		current_place++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: wcaetano <wcaetano@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 19:30:49 by wcaetano          #+#    #+#             */
-/*   Updated: 2023/03/12 16:41:40 by wcaetano         ###   ########.fr       */
+/*   Updated: 2023/03/12 17:16:37 by wcaetano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,11 @@ void	*pop_back(t_list **stack);
 void	*pop_front(t_list **stack);
 void	ft_printf_stacks(t_list *stack_a, t_list *stack_b);
 void	swap(t_list **stack);
-void	push(t_list **src, t_list **dst);
-void	rotate(t_list **stack);
+void	push(t_list **src, t_list **dst, char *msg);
+void	rotate(t_list **stack, char *msg);
 void	rrotate(t_list **stack);
 void	binary_radix_sort(t_list **stack_a, t_list **stack_b, int size);
 t_list	*fill_stack(t_list **stack, int *lst, int size);
 int		is_ordered(t_list *stack);
+t_list	*parse_lst(int *tmp, int *lst, t_list *stack, int size);
 #endif
