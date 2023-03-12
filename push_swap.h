@@ -6,7 +6,7 @@
 /*   By: wcaetano <wcaetano@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 19:30:49 by wcaetano          #+#    #+#             */
-/*   Updated: 2023/03/12 17:16:37 by wcaetano         ###   ########.fr       */
+/*   Updated: 2023/03/12 17:48:10 by wcaetano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int		*get_int_lst(char **argv, int argc);
 int		get_int(t_list *node);
 void	*pop_back(t_list **stack);
 void	*pop_front(t_list **stack);
-void	ft_printf_stacks(t_list *stack_a, t_list *stack_b);
 void	swap(t_list **stack);
 void	push(t_list **src, t_list **dst, char *msg);
 void	rotate(t_list **stack, char *msg);
