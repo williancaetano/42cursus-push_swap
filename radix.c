@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort.c                                             :+:      :+:    :+:   */
+/*   radix.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wcaetano <wcaetano@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 16:53:29 by wcaetano          #+#    #+#             */
-/*   Updated: 2023/03/12 17:19:33 by wcaetano         ###   ########.fr       */
+/*   Updated: 2023/03/14 00:11:57 by wcaetano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void	index_stack(t_list	*stack, int size)
 {
 	int		*lst;
 	int		i;
-	int		j;
 	t_list	*p;
 	int		*tmp;
 
@@ -123,15 +122,15 @@ void	binary_radix_sort(t_list **stack_a, t_list **stack_b, int size)
 		while (operations++ < size)
 		{
 			if (((get_int(*stack_a) >> current_place) & 1) == 1)
-				rotate(stack_a, "ra\n");
+				rotate(stack_a, "ra");
 			else
 			{
-				push(stack_a, stack_b, "pb\n");
+				push(stack_a, stack_b, "pb");
 				b_size++;
 			}
 		}
 		while (b_size--)
-			push(stack_b, stack_a, "pa\n");
+			push(stack_b, stack_a, "pa");
 		current_place++;
 	}
 }

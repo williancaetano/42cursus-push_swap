@@ -6,7 +6,7 @@
 /*   By: wcaetano <wcaetano@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 19:30:55 by wcaetano          #+#    #+#             */
-/*   Updated: 2023/03/12 16:10:10 by wcaetano         ###   ########.fr       */
+/*   Updated: 2023/03/14 03:15:31 by wcaetano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,22 +31,24 @@ void	*pop_front(t_list **stack)
 void	*pop_back(t_list **stack)
 {
 	void	*tmp;
+	t_list	*prev;
+	t_list	*p;
 
+	p = *stack;
 	if (stack && *stack)
 	{
-		if (!(*stack)->next)
+		if (!p->next)
 			return (pop_front(stack));
-		while ((*stack)->next)
+		while (p->next)
 		{
-			if (!(*stack)->next->next)
-			{
-				tmp = (*stack)->next->content;
-				free((*stack)->next);
-				(*stack)->next = NULL;
-				return (tmp);
-			}
-			*stack = (*stack)->next;
+			prev = p;
+			p = p->next;
 		}
+		tmp = p->content;
+		get_int(tmp);
+		free(p);
+		prev->next = NULL;
+		return (tmp);
 	}
 	return (NULL);
 }

@@ -1,8 +1,8 @@
 
-SRCS=operations.c push_swap.c sort.c stack.c
+SRCS=operations.c push_swap.c stack.c radix.c sort.c validations.c utils.c
 NAME=push_swap
 CC=cc
-CFLAGS=-g
+CFLAGS=-Wall -Werror -Wextra
 LIBFT_PATH=libft
 LIBFT=$(LIBFT_PATH)/libft.a
 

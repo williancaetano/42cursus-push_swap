@@ -6,7 +6,7 @@
 /*   By: wcaetano <wcaetano@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 20:01:41 by wcaetano          #+#    #+#             */
-/*   Updated: 2023/03/12 16:14:05 by wcaetano         ###   ########.fr       */
+/*   Updated: 2023/03/14 03:39:32 by wcaetano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,6 @@ void	dummy(void *tmp)
 		return ;
 	else
 		return ;
-}
-
-int	ft_isnumber(char *str)
-{
-	if (*str == '-' || *str == '+')
-		str++;
-	while (*str)
-	{
-		if (!ft_isdigit(*str))
-			return (0);
-		str++;
-	}
-	return (1);
 }
 
 int	*get_int_lst(char **argv, int argc)
@@ -70,25 +57,49 @@ t_list	*fill_stack(t_list **stack, int *lst, int size)
 	return (*stack);
 }
 
+void	init(t_list **stack_a, t_list **stack_b, int **lst, char **argv)
+{
+	int	argc;
+
+	*stack_a = NULL;
+	*stack_b = NULL;
+	argc = 0;
+	while (argv[argc])
+		argc++;
+	if (argc == 1)
+		exit(0);
+	*lst = get_int_lst(argv, argc);
+	if (!*lst)
+	{
+		write(1, "ERROR\n", 6);
+		exit(1);
+	}
+	if (!check_repeat(*lst, argc - 1) || !check_overflow(argv + 1))
+	{
+		write(1, "ERROR\n", 6);
+		exit(1);
+	}
+	fill_stack(stack_a, *lst, argc - 1);
+}
+
 int	main(int argc, char **argv)
 {
 	t_list	*stack_a;
 	t_list	*stack_b;
 	int		*lst;
 
-	if (argc < 2)
+	init(&stack_a, &stack_b, &lst, argv);
+	if (!is_ordered(stack_a))
 	{
-		write(1, "ERROR\n", 6);
-		return (0);
+		if (argc - 1 == 2)
+			swap(&stack_a, "sa");
+		else if (argc - 1 == 3)
+			sort_three(&stack_a);
+		else if (argc - 1 == 5 || argc - 1 == 4)
+			until_five_sort(&stack_a, &stack_b);
+		else
+			binary_radix_sort(&stack_a, &stack_b, argc - 1);
 	}
-	lst = get_int_lst(argv, argc);
-	if (!lst)
-		return (0);
-	stack_a = NULL;
-	stack_b = NULL;
-	fill_stack(&stack_a, lst, argc - 1);
-	binary_radix_sort(&stack_a, &stack_b, argc - 1);
 	ft_lstclear(&stack_a, dummy);
 	ft_lstclear(&stack_b, dummy);
-	free(lst);
 }
